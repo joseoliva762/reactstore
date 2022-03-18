@@ -31,6 +31,15 @@
       ],
       "@hooks/*": [
         "hooks/*"
+      ],
+      "@common/*": [
+        "common/*"
+      ],
+      "@layout/*": [
+        "layout/*"
+      ],
+      "@services/*": [
+        "services/*"
       ]
     },
     "target": "es5",
