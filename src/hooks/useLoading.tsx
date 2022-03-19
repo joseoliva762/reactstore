@@ -27,7 +27,6 @@ const useLoadingProvider = () => {
 
   const changeLoadingState = (state: boolean) => {
     setIsloading(state);
-    console.log({ isLoading });
   };
 
   return {

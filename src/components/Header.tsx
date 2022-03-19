@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
@@ -67,7 +68,7 @@ export default function Header() {
                       <div>
                         <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                           <span className="sr-only">Open user menu</span>
-                          <Image className="h-8 w-8 rounded-full" src={userData.imageUrl} alt="" height="32" width="32" />
+                          <img className="h-8 w-8 rounded-full" src={userData.imageUrl} alt="" height="32" width="32" />
                         </Menu.Button>
                       </div>
                       <Transition
