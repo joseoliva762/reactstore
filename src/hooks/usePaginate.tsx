@@ -32,7 +32,6 @@ export const usePaginate = () => useContext(PaginateContext);
 
 const usePaginateProvider = () => {
   const [paginate, setPaginate] = useState(paginateInitialState);
-
   useEffect(() => {
     setProductsSegment(paginate.actualPage);
     // eslint-disable-next-line react-hooks/exhaustive-deps

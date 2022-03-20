@@ -1,9 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 import { Product } from '@models/product';
 import { usePaginate } from '@hooks/usePaginate';
+import { useLoading } from '@hooks/useLoading';
+import { useEffect } from 'react';
 
 export default function ProductsList() {
   const { paginate } = usePaginate();
+  const loading = useLoading();
+
+  useEffect(() => {
+    loading.changeLoadingState(!paginate.products.length);
+  }, [loading, paginate.products.length]);
 
   return (
     <>
