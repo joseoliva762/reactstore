@@ -23,11 +23,15 @@ const Paginate = () => {
   return (
     <>
       <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-        <div className="flex-1 flex justify-between sm:hidden">
+        <div className="flex-1 flex gap-1 items-center justify-between sm:hidden">
           <button onClick={() => selectPage(paginate.actualPage - 1)} className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
             Previous
           </button>
-          <button onClick={() => selectPage(paginate.actualPage + 1)} className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+          <div className="flex gap-1 items-center h-full justify-center w-full">
+            <p className="text-sm text-gray-900">Page</p>
+            <p className="font-bold text-sm text-gray-900">{paginate.actualPage}</p>
+          </div>
+          <button onClick={() => selectPage(paginate.actualPage + 1)} className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
             Next
           </button>
         </div>

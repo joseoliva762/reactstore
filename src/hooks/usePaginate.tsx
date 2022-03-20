@@ -5,7 +5,7 @@ import { createContext, useContext, ReactNode, useState, useEffect } from 'react
 let paginateInitialState = {
   actualPage: 1,
   actualShow: 1,
-  range: 25,
+  range: 10,
   products: [] as Product[],
   productsSegment: [] as Product[],
   maximumPages: 1,
@@ -32,7 +32,6 @@ export const usePaginate = () => useContext(PaginateContext);
 
 const usePaginateProvider = () => {
   const [paginate, setPaginate] = useState(paginateInitialState);
-  console.log('cargar');
 
   useEffect(() => {
     setProductsSegment(paginate.actualPage);
