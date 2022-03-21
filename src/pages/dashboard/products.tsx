@@ -1,20 +1,19 @@
 import Head from 'next/head';
 import Paginate from '@components/Paginate';
+import ProductsHeaders from '@components/ProductsHeader';
 import ProductsList from '@components/ProductsList';
 import { PaginateProvider } from '@hooks/usePaginate';
-import Statistics from '@components/Statistics';
 
-export default function Dashboard() {
+export default function Products() {
   return (
     <>
       <Head>
-        <title>YardStore - Dashboard</title>
+        <title>YardStore - Products</title>
       </Head>
       <PaginateProvider>
-        <Statistics />
+        <ProductsHeaders />
         <Paginate />
         <ProductsList />
-        <Paginate />
       </PaginateProvider>
     </>
   );

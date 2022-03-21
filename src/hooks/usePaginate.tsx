@@ -14,11 +14,11 @@ let paginateInitialState = {
 
 export const PaginateContext = createContext({} as PaginateContextModel);
 
-interface PaginatePrividerParams {
+interface PaginateProviderParams {
   children: ReactNode;
 }
 
-export const PaginatePrivider = ({ children }: PaginatePrividerParams) => {
+export const PaginateProvider = ({ children }: PaginateProviderParams) => {
   const paginate = usePaginateProvider();
 
   return (

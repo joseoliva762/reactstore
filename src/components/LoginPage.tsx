@@ -12,22 +12,22 @@ export default function LoginPage() {
   const router = useRouter();
   const auth = useAuth();
 
-  const singInHander = () => {
+  const handleSingIn = () => {
     router.push('/dashboard');
     changeLoadingState(false);
   };
 
-  const singInErrorHandler = (err: Error) => {
+  const handleSignInError = (err: Error) => {
     console.error(err);
     changeLoadingState(false);
   };
 
-  const submitHanlder: FormEventHandler<HTMLFormElement> = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     changeLoadingState(true);
     const email = emailRef.current?.value || '';
     const password = passwordRef.current?.value || '';
-    auth.signIn(email, password).then(singInHander).catch(singInErrorHandler);
+    auth.signIn(email, password).then(handleSingIn).catch(handleSignInError);
   };
 
   return (
@@ -40,7 +40,7 @@ export default function LoginPage() {
             </figure>
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
           </div>
-          <form className="mt-8 space-y-6" onSubmit={submitHanlder}>
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>

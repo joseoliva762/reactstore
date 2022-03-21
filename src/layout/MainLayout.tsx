@@ -16,7 +16,7 @@ export default function MainLayout({ children }: MainLayoutParams) {
           <Header />
           <Nav />
           <main>
-            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px">{children}</div>
+            <div className="max-w-7xl mx-auto py-6 px-1 sm:px-6 lg:px">{children}</div>
           </main>
         </div>
       </LoadingProvider>

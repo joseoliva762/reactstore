@@ -34,7 +34,7 @@ export default function Modal({ open, setOpen, children }: ModalParams) {
                 <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => setOpen(false)} ref={cancelButtonRef} />
               </div>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">{children}</div>
+                <div className="w-full flex items-start">{children}</div>
               </div>
             </div>
           </Transition.Child>
