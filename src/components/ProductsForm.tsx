@@ -1,22 +1,58 @@
-import { FormEvent, FormEventHandler, useRef, useState } from 'react';
+import { Dispatch, FormEvent, FormEventHandler, SetStateAction, useRef, useState } from 'react';
 import { XIcon } from '@heroicons/react/solid';
+import { Product } from '@models/product';
+import { usePaginate } from '@hooks/usePaginate';
+import { addProducts, getAllProducts } from '@services/api/products';
+import { useLoading } from '@hooks/useLoading';
+import { AlertModel } from '@models/alert';
 
-export default function ProductsForm() {
+interface ProductsFormParams {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  setAlert: Dispatch<SetStateAction<AlertModel>>;
+}
+
+export default function ProductsForm({ setOpen, setAlert }: ProductsFormParams) {
+  const { changeLoadingState } = useLoading();
+  const { setProducts } = usePaginate();
   const [file, setFile] = useState<File>();
   const formRef = useRef<HTMLFormElement>(null);
   const imagesRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    changeLoadingState(true);
     const formdata = new FormData(event.currentTarget);
-    const data = {
-      title: formdata.get('title'),
+    const payload: Product = {
+      title: formdata.get('title') as string,
       price: parseInt(formdata.get('price')?.toString() || '0'),
-      description: formdata.get('description'),
+      description: formdata.get('description') as string,
       categoryId: parseInt(formdata.get('category')?.toString() || '0'),
       images: [(formdata.get('images') as File).name]
     };
-    console.log(data);
+    addProducts(payload)
+      .then(() => {
+        getAllProducts(0, 0).then((products: Product[]) => {
+          setProducts(products);
+          formRef.current?.reset();
+          setOpen(false);
+          changeLoadingState(false);
+          setAlert({
+            active: true,
+            message: 'Product added successfully',
+            type: 'success',
+            autoClose: false
+          });
+        });
+      })
+      .catch((error) => {
+        changeLoadingState(false);
+        setAlert({
+          active: true,
+          message: error.message,
+          type: 'error',
+          autoClose: true
+        });
+      });
   };
 
   const handleImages = () => {

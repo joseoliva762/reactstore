@@ -1,12 +1,17 @@
+import Alert from '@common/Alert';
 import Modal from '@common/Modal';
 import { CheckIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 import ProductsForm from './ProductsForm';
+import { useAlert } from '@hooks/useAlert';
 
 export default function ProductsHeaders() {
   const [open, setOpen] = useState(false);
+  const { alert, setAlert, toggleAlert } = useAlert();
+
   return (
     <>
+      {alert.active && <Alert alert={alert} handleClose={toggleAlert} />}
       <div className="lg:flex lg:items-center lg:justify-between mb-8">
         <div className="flex-1 min-w-0">
           <h2 className="hidden text-md font-bold leading-7 text-gray-900 sm:text-lg sm:truncate sm:block">List of Products</h2>
@@ -24,7 +29,7 @@ export default function ProductsHeaders() {
           </span>
         </div>
         <Modal open={open} setOpen={setOpen}>
-          <ProductsForm />
+          <ProductsForm setAlert={setAlert} setOpen={setOpen} />
         </Modal>
       </div>
     </>

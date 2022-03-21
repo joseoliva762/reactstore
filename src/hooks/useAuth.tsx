@@ -42,15 +42,7 @@ const useProviderAuth = (): AuthContextModel => {
       Cookie.set('token', token, attributes);
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       const { data: userdata } = await axios.get<User>(endPoints.auth.profile);
-      const defaultUser: User = {
-        id: 3,
-        email: 'admin@mail.com',
-        name: 'Admin',
-        password: 'admin123',
-        role: 'admin'
-      };
-      const needDefault = !userdata;
-      setUser(needDefault ? defaultUser : userdata);
+      setUser(userdata);
     }
   };
 

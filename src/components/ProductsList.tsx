@@ -3,14 +3,22 @@ import { Product } from '@models/product';
 import { usePaginate } from '@hooks/usePaginate';
 import { useLoading } from '@hooks/useLoading';
 import { useEffect } from 'react';
+import { XCircleIcon } from '@heroicons/react/solid';
+import { deleteProduct, getAllProducts } from '@services/api/products';
 
 export default function ProductsList() {
-  const { paginate } = usePaginate();
+  const { paginate, setProducts } = usePaginate();
   const loading = useLoading();
 
   useEffect(() => {
     loading.changeLoadingState(!paginate.products.length);
   }, [loading, paginate.products.length]);
+
+  const handleDelete = (id: number) => {
+    deleteProduct(id)
+      .then(() => getAllProducts(0, 0).then(setProducts))
+      .catch(console.error);
+  };
 
   return (
     <>
@@ -59,13 +67,13 @@ export default function ProductsList() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{`$${product.price}.00`}</span>
                       </td>
-                      <td className="flex gap-1 px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {/* <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
                           Edit
-                        </a>
-                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
-                          Delete
-                        </a>
+                        </a> */}
+                        <div className="flex items-center justify-start h-full">
+                          <XCircleIcon className="flex flex-shrink-0 h-6 text-gray-400 hover:text-gray-500 w-6 hover:cursor-pointer" aria-hidden onClick={() => product?.id && handleDelete(product?.id)} />
+                        </div>
                       </td>
                     </tr>
                   ))}
