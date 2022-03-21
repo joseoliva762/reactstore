@@ -1,8 +1,8 @@
 import axios from 'axios';
 import endPoints from '@services/api';
-import { Product } from '@models/product';
+import { Product, ProductToCreate } from '@models/product';
 
-const addProducts = async (payload: Product) => {
+const addProducts = async (payload: ProductToCreate) => {
   const options = {
     headers: {
       accept: '*/*',

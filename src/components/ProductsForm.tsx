@@ -1,6 +1,6 @@
 import { Dispatch, FormEvent, FormEventHandler, SetStateAction, useRef, useState } from 'react';
 import { XIcon } from '@heroicons/react/solid';
-import { Product } from '@models/product';
+import { Product, ProductToCreate } from '@models/product';
 import { usePaginate } from '@hooks/usePaginate';
 import { addProducts, getAllProducts } from '@services/api/products';
 import { useLoading } from '@hooks/useLoading';
@@ -22,7 +22,7 @@ export default function ProductsForm({ setOpen, setAlert }: ProductsFormParams) 
     event.preventDefault();
     changeLoadingState(true);
     const formdata = new FormData(event.currentTarget);
-    const payload: Product = {
+    const payload: ProductToCreate = {
       title: formdata.get('title') as string,
       price: parseInt(formdata.get('price')?.toString() || '0'),
       description: formdata.get('description') as string,
