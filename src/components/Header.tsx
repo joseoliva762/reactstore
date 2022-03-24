@@ -106,7 +106,6 @@ export default function Header() {
                             )}
                           </Menu.Item>
                         </Menu.Items>
-                        ñ
                       </Transition>
                     </Menu>
                   </div>
