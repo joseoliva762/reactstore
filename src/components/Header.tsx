@@ -6,6 +6,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
 import { useAuth } from '@hooks/useAuth';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', current: true },
@@ -14,8 +15,7 @@ const navigation = [
 ];
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' }
+  { name: 'Settings', href: '#' }
 ];
 
 function classNames(...classes: any[]) {
@@ -24,11 +24,18 @@ function classNames(...classes: any[]) {
 
 export default function Header() {
   const auth = useAuth();
+  const router = useRouter();
   const { name, email } = auth.user;
   const userData = {
     name: name || '',
     email: email || '',
     imageUrl: `https://ui-avatars.com/api/?name=${name || 'John+Doe'}`
+  };
+
+  const handleSingOut = () => {
+    console.log('sign out');
+    auth.signOut();
+    router.push('/auth');
   };
 
   return (
@@ -91,7 +98,15 @@ export default function Header() {
                               )}
                             </Menu.Item>
                           ))}
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button onClick={handleSingOut} className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-left text-sm text-gray-700 w-full')}>
+                                Sign out
+                              </button>
+                            )}
+                          </Menu.Item>
                         </Menu.Items>
+                        ñ
                       </Transition>
                     </Menu>
                   </div>
@@ -139,6 +154,9 @@ export default function Header() {
                       {item.name}
                     </Disclosure.Button>
                   ))}
+                  <Disclosure.Button as="button" onClick={handleSingOut} className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                    Sign out
+                  </Disclosure.Button>
                 </div>
               </div>
             </Disclosure.Panel>

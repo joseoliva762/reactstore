@@ -46,8 +46,15 @@ const useProviderAuth = (): AuthContextModel => {
     }
   };
 
+  const signOut = () => {
+    Cookie.remove('token');
+    setUser({} as User);
+    axios.defaults.headers.common['Authorization'] = '';
+  };
+
   return {
     user,
-    signIn
+    signIn,
+    signOut
   };
 };

@@ -5,6 +5,7 @@ import { useLoading } from '@hooks/useLoading';
 import { useEffect } from 'react';
 import { XCircleIcon } from '@heroicons/react/solid';
 import { deleteProduct, getAllProducts } from '@services/api/products';
+import Link from 'next/link';
 
 export default function ProductsList() {
   const { paginate, setProducts } = usePaginate();
@@ -67,10 +68,10 @@ export default function ProductsList() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{`$${product.price}.00`}</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        {/* <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
-                          Edit
-                        </a> */}
+                      <td className="flex gap-3 px-6 py-4 whitespace-nowrap">
+                        <Link href={`/dashboard/products/edit/${product.id}`} passHref>
+                          <div className="cursor-pointer text-indigo-600 hover:text-indigo-900">Edit</div>
+                        </Link>
                         <div className="flex items-center justify-start h-full">
                           <XCircleIcon className="flex flex-shrink-0 h-6 text-gray-400 hover:text-gray-500 w-6 hover:cursor-pointer" aria-hidden onClick={() => product?.id && handleDelete(product?.id)} />
                         </div>
